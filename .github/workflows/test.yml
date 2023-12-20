@@ -28,7 +28,7 @@ jobs:
           path: "abc.txt"
 
       - name: File contents
-        run: if [ $steps.read_file.outputs.contents == "pass" ]; then exit 1; else exit 0; fi
+        run: if [ $steps.read_file.outputs.contents == *"pass"* ]; then exit 1; else exit 0; fi
   notify:
     needs:
       - build
@@ -43,7 +43,6 @@ jobs:
         with:
           webhook_url: ${{ secrets.MSTEAMS_WEBHOOK}}
           job: '{ "status": "failure" }'
-          dry_run: False
       - id: Notify_success
         name: Microsoft Teams Notification
         uses: skitionek/notify-microsoft-teams@master
@@ -51,4 +50,3 @@ jobs:
         with:
           webhook_url: ${{ secrets.MSTEAMS_WEBHOOK}}
           job: '{ "status": "success" }'
-          dry_run: False
