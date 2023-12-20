@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@master
       - id: Forced_failure
         name: Try to fail
-        run: exit 0
+        run: exit 1
       - id: Notify_failure
         name: Microsoft Teams Notification
         uses: skitionek/notify-microsoft-teams@master
