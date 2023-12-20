@@ -20,7 +20,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Read file contents
-        id: read_file
+        id: template
         uses: traversals-analytics-and-intelligence/file-reader-action@master
         with:
           file: "abc.txt"
