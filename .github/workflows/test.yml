@@ -15,32 +15,20 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  if_failure:
+    name: Only if failure
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      - name: Sleep for 1 minute
-        run: sleep 60
-        shell: bash
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-
-      - name: Microsoft Teams Notification
+      - uses: actions/checkout@master
+      - id: Forced_failure
+        name: Try to fail
+        run: exit 1
+      - id: Notify_failure
+        name: Microsoft Teams Notification
         uses: skitionek/notify-microsoft-teams@master
-        if: always()
+        if: failure()
         with:
-          webhook_url: ${{ secrets.MSTEAMS_WEBHOOK }}
+          webhook_url: ${{ secrets.MSTEAMS_WEBHOOK}}
+          needs: ${{ env.needs }}
+          job: ${{ toJson(job) }}
+          steps: ${{ env.steps }}
