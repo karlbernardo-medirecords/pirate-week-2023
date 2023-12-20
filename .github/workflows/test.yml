@@ -23,7 +23,7 @@ jobs:
         id: read_file
         uses: traversals-analytics-and-intelligence/file-reader-action@master
         with:
-          path: "abc.txt"
+          file: "abc.txt"
 
       - name: File contents
         run: echo "${{ steps.template.outputs.content }}"
