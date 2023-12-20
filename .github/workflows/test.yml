@@ -15,14 +15,14 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  if_failure:
-    name: Only if failure
+  build:
+    name: sending message
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
       - id: Forced_failure
         name: Try to fail
-        run: exit 1
+        run: exit 0
       - id: Notify_failure
         name: Microsoft Teams Notification
         uses: skitionek/notify-microsoft-teams@master
