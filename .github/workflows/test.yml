@@ -44,7 +44,6 @@ jobs:
         with:
           webhook_url: ${{ secrets.MSTEAMS_WEBHOOK}}
           job: '{ "status": "failure" }'
-          dry_run: true
       - id: Notify_success
         name: Microsoft Teams Notification
         uses: skitionek/notify-microsoft-teams@master
@@ -52,4 +51,3 @@ jobs:
         with:
           webhook_url: ${{ secrets.MSTEAMS_WEBHOOK}}
           job: '{ "status": "success" }'
-          dry_run: true
