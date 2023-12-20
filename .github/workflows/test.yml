@@ -28,7 +28,7 @@ jobs:
           path: "abc.txt"
 
       - name: File contents
-        run: if [ $steps.read_file.outputs.contents -eq "pass" ]; then exit 0; else exit 1; fi
+        run: if [ $steps.read_file.outputs.contents == "pass" ]; then exit 0; else exit 1; fi
   notify:
     needs:
       - build
